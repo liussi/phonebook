@@ -5,7 +5,7 @@ export const ContactListWrapper = styled.div`
 `;
 
 export const ContactListItem = styled.li`
-  width: 50%; 
+  width: 50%;
   margin-right: auto;
   margin-left: auto;
   display: flex;
@@ -25,9 +25,15 @@ export const ContactListItem = styled.li`
 export const ContactInfo = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
 `;
 
 export const ContactName = styled.span`
+  flex-grow: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; 
   margin-right: 10px;
 `;
 
@@ -41,7 +47,9 @@ export const DeleteButton = styled.button`
   padding: 5px 10px;
   cursor: pointer;
   transition: background-color 0.3s;
-
+  flex-shrink: 0;
+  margin-left: 10px;
+  
   &:hover {
     background-color: #ff4f4f;
   }
