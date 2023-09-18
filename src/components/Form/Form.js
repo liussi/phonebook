@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { useState } from 'react';
 import { Formik } from 'formik';
 import { nanoid } from 'nanoid';
 import { object, string } from 'yup';
@@ -19,59 +19,65 @@ const schema = object({
 });
 
 
-export default class ContactForm extends Component {
-  initialValues = { name: '', number: '' };
+export default function ContactForm({ onAddContact }) {
+  // const [name, setName] = useState('');
+  // const [number, setNumber] = useState('');
 
-  formHandleSubmit = (values, {resetForm}) => {
-    const { name, number } = values;
+const initialValues = { name: '', number: '' };
 
-    if (name.trim() === '' && number.trim() === '') {
-      return;
-    }
+const formHandleSubmit = (values, { resetForm }) => {
+  const { name, number } = values;
 
-    const newContact = {
-      id: nanoid(),
-      name: name,
-      number: number,
-    };
+  if (name.trim() === '' && number.trim() === '') {
+    return;
+  }
 
-    this.props.onAddContact(newContact);
-    resetForm();
+  const newContact = {
+    id: nanoid(),
+    name: name,
+    number: number,
   };
 
-  render() {
-    return (
-      <Formik initialValues={this.initialValues} onSubmit={this.formHandleSubmit} validationSchema={schema}>
-        <FormWrapper>
-          <FormLabel>
-            Name
-            <FormInput
-              type="text"
-              name="name"
-              placeholder="Name Lastname"
-              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-              required
-            />
-            <ErrorMessageForm name="name" />
-          </FormLabel>
-
-          <FormLabel>
-            Number
-            <FormInput
-              type="tel"
-              name="number"
-              placeholder="123-45-67"
-              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-              required
-            />
-            <ErrorMessageForm name="number"/>
-          </FormLabel>
-
-          <FormButton type="submit">Add contact</FormButton>
-        </FormWrapper>
-      </Formik>
-    )
-  }
+ onAddContact(newContact);
+  resetForm();
 };
+
+
+  return (
+    <Formik
+      initialValues={initialValues}
+      onSubmit={formHandleSubmit}
+      validationSchema={schema}
+    >
+      <FormWrapper>
+        <FormLabel>
+          Name
+          <FormInput
+            type="text"
+            name="name"
+            placeholder="Name Lastname"
+            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+            required
+          />
+          <ErrorMessageForm name="name" />
+        </FormLabel>
+
+        <FormLabel>
+          Number
+          <FormInput
+            type="tel"
+            name="number"
+            placeholder="123-45-67"
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            required
+          />
+          <ErrorMessageForm name="number" />
+        </FormLabel>
+
+        <FormButton type="submit">Add contact</FormButton>
+      </FormWrapper>
+    </Formik>
+  );
+}
