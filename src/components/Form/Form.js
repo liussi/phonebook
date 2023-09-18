@@ -1,5 +1,4 @@
-// import { useState } from 'react';
-import { Formik } from 'formik';
+import { Formik, useFormik } from 'formik';
 import { nanoid } from 'nanoid';
 import { object, string } from 'yup';
 import {
@@ -11,43 +10,37 @@ import {
 } from './Form.styled.js';
 
 const schema = object({
-  name: string()
-    .min(2, 'Too Short!')
-    .max(70, 'Too Long!')
-    .required('Required'),
+  name: string().min(2, 'Too Short!').max(70, 'Too Long!').required('Required'),
   number: string().min(9).max(9).required('Required'),
 });
 
-
 export default function ContactForm({ onAddContact }) {
-  // const [name, setName] = useState('');
-  // const [number, setNumber] = useState('');
+  const formik = useFormik({
+    initialValues: { name: '', number: '' },
+  });
 
-const initialValues = { name: '', number: '' };
+  const formHandleSubmit = (values, { resetForm }) => {
+    const { name, number } = values;
 
-const formHandleSubmit = (values, { resetForm }) => {
-  const { name, number } = values;
+    if (name.trim() === '' && number.trim() === '') {
+      return;
+    }
 
-  if (name.trim() === '' && number.trim() === '') {
-    return;
-  }
+    const newContact = {
+      id: nanoid(),
+      name: name,
+      number: number,
+    };
 
-  const newContact = {
-    id: nanoid(),
-    name: name,
-    number: number,
+    onAddContact(newContact);
+    resetForm();
   };
-
- onAddContact(newContact);
-  resetForm();
-};
-
 
   return (
     <Formik
-      initialValues={initialValues}
-      onSubmit={formHandleSubmit}
       validationSchema={schema}
+      onSubmit={formHandleSubmit}
+      initialValues={formik.initialValues}
     >
       <FormWrapper>
         <FormLabel>
