@@ -4,15 +4,15 @@ import { Filter } from './Filter/Filter';
 import { ContactList } from './ContactList/ContactList';
 import { Title } from './Global.style';
 import { useEffect, useMemo } from 'react';
-import '../store.js/store';
+import store from '../store.js/store';
 import { useDispatch, useSelector } from 'react-redux';
-// import { deleteContacts, addContacts } from '../store.js/contacts/contactSlise'
+import { deleteContacts, addContacts } from '../store.js/contacts/contactSlise'
 import { setFilterSearch } from 'store.js/filter/actions';
-import { addContacts, deleteContacts } from 'store.js/contacts/actions';
+// import { addContacts, deleteContacts } from 'store.js/contacts/actions';
 
 export function App() {
 
-  const { contacts} = useSelector(store => store.contacts);
+  const { contacts } = useSelector(store => store.contacts);
  const {filter} = useSelector(store => store.filter);
   console.log(filter);
   console.log(contacts);
