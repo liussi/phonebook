@@ -7,7 +7,7 @@ import { useEffect, useMemo } from 'react';
 import store from '../store.js/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContacts, addContacts } from '../store.js/contacts/contactSlise'
-import { setFilterSearch } from 'store.js/filter/actions';
+import { setFilterSearch } from 'store.js/filter/filterSlise';
 // import { addContacts, deleteContacts } from 'store.js/contacts/actions';
 
 export function App() {
