@@ -8,13 +8,35 @@ import {
   FormButton,
   ErrorMessageForm,
 } from './Form.styled.js';
+import { useDispatch } from 'react-redux';
+import { addContacts } from 'redux/contacts/contactSlise';
+import { useSelector } from 'react-redux';
+import { getContacts } from 'redux/contacts/selector';
 
 const schema = object({
   name: string().min(2, 'Too Short!').max(70, 'Too Long!').required('Required'),
   number: string().min(9).max(9).required('Required'),
 });
 
-export default function ContactForm({ onAddContact }) {
+export default function ContactForm() {
+  const dispatch = useDispatch();
+
+  const { contacts } = useSelector(getContacts);
+  
+  const onAddContact = newContact => {
+    if (offAddContact(newContact.name)) {
+      alert('Contact with this name already exists!');
+      return;
+    }
+    dispatch(addContacts(newContact));
+  };
+
+  const offAddContact = newContactName => {
+    return contacts.some(
+      contact => contact.name.toLowerCase() === newContactName.toLowerCase()
+    );
+  };
+
   const formik = useFormik({
     initialValues: { name: '', number: '' },
   });
@@ -31,7 +53,7 @@ export default function ContactForm({ onAddContact }) {
       name: name,
       number: number,
     };
-    
+
     onAddContact(newContact);
     resetForm();
   };
