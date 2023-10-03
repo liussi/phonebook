@@ -31,7 +31,7 @@ export default function ContactForm({ onAddContact }) {
       name: name,
       number: number,
     };
-
+    
     onAddContact(newContact);
     resetForm();
   };
