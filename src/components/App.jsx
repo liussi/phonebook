@@ -5,8 +5,9 @@ import { ContactList } from './ContactList/ContactList';
 import { Title } from './Global.style';
 import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContacts, addContacts } from '../redux/contacts/contactSlise';
 import { setFilterSearch } from 'redux/filter/filterSlise';
+import { addContacts, deleteContacts } from 'redux/contacts/contactSlise';
+
 
 export function App() {
 
