@@ -3,11 +3,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Filter } from './Filter/Filter';
 import { ContactList } from './ContactList/ContactList';
 import { Title } from './Global.style';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContacts, addContacts } from '../store.js/contacts/contactSlise';
 import { setFilterSearch } from 'store.js/filter/filterSlise';
-// import { addContacts, deleteContacts } from 'store.js/contacts/actions';
 
 export function App() {
   const { contacts } = useSelector(store => store.contacts);
