@@ -15,7 +15,7 @@ export const ContactList = ({ filteredContacts, onDeleteContact }) => {
           <ContactListItem key={contact.id}>
             <ContactName>{contact.name}</ContactName>
             <ContactNumber>{contact.number}</ContactNumber>
-            <DeleteButton onClick={() => onDeleteContact(contact.id)}>Видалити</DeleteButton>
+            <DeleteButton onClick={() => onDeleteContact(contact.id)}>Delete</DeleteButton>
           </ContactListItem>
         ))}
       </ul>
