@@ -1,6 +1,4 @@
-import { FILTER_SEARCH } from "./types";
+import { createAction } from '@reduxjs/toolkit';
 
-export const setFilterSearch = value => ({
-  type: FILTER_SEARCH,
-  payload: value,
-});
+
+export const setFilterSearch = createAction('FILTER_SEARCH');

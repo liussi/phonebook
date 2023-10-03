@@ -6,16 +6,16 @@ import { Title } from './Global.style';
 import { useEffect, useMemo } from 'react';
 import '../store.js/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContacts, onAddContacts } from 'store.js/contacts/actions';
+// import { deleteContacts, addContacts } from '../store.js/contacts/contactSlise'
 import { setFilterSearch } from 'store.js/filter/actions';
-import { store } from '../store.js/store';
+import { addContacts, deleteContacts } from 'store.js/contacts/actions';
 
 export function App() {
 
   const { contacts} = useSelector(store => store.contacts);
  const {filter} = useSelector(store => store.filter);
   console.log(filter);
-  console.log(store)
+  console.log(contacts);
 
   const dispatch = useDispatch();
 
@@ -31,7 +31,7 @@ export function App() {
       return;
     }
 
-    dispatch(onAddContacts(newContact));
+    dispatch(addContacts(newContact));
   };
 
   const offAddContact = newContactName => {

@@ -1,10 +1,4 @@
-const { CREATE_CONTACTS, DELITE_CONTACTS } = require('./types');
+import { createAction } from '@reduxjs/toolkit';
 
-export const onAddContacts = value => ({
-  type: CREATE_CONTACTS,
-  payload: value,
-});
-export const deleteContacts = value => ({
-  type: DELITE_CONTACTS,
-  payload: value,
-});
+export const addContacts = createAction('CREATE_CONTACTS');
+export const deleteContacts = createAction('DELITE_CONTACTS');
