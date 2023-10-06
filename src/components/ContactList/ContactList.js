@@ -1,4 +1,3 @@
-import React, { useMemo } from 'react';
 import {
   ContactListWrapper,
   ContactListItem,
@@ -27,7 +26,7 @@ export const ContactList = () => {
   const deleteContact = contactId => {
     dispatch(deleteContacts(contactId));
   };
-  
+
   return (
     <ContactListWrapper>
       <ul>
