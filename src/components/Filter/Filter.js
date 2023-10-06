@@ -7,13 +7,14 @@ import { getfilter } from 'redux/filter/selector';
 
 export const Filter = () => {
 
-  const { filter } = useSelector(getfilter);
+  const  {filter}  = useSelector(getfilter);
 
   const dispatch = useDispatch();
 
   const onFilterSearch = e => {
-     const value = e.target.value.toLowerCase();
-     dispatch(setFilterSearch(value));
+     const valueForm = e.target.value.toLowerCase();
+    dispatch(setFilterSearch(valueForm));
+   
   };
   
   return (
