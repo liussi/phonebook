@@ -17,12 +17,17 @@ export const ContactList = () => {
   const items = useSelector(getContacts);
 
   const filteredItems = () => {
+    if (!filter) {
+      return items;
+    }
+
     return items.filter(contact => contact.name.toLowerCase().includes(filter));
   };
 
   const deleteContact = contactId => {
     dispatch(deleteContacts(contactId));
   };
+  
   return (
     <ContactListWrapper>
       <ul>
