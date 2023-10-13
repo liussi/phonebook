@@ -1,18 +1,18 @@
 import { useDispatch } from "react-redux";
-import { register } from "redux/auth/operations";
+import { login } from "redux/auth/operations";
 
 
 export const LoginForm = () => {
-  // const dispath = useDispatch();
+  const dispath = useDispatch();
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const form = e.currentTarget;
-  //   dispath(register({name:form.elements.name.value,email:form.elements.email.value, password:form.elements.password.value}))
-  //   form.reset();
-  // }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    dispath(login({email:form.elements.email.value, password:form.elements.password.value}))
+    form.reset();
+  }
     return (
-      <form >
+      <form onSubmit={handleSubmit}>
         <label>
           Email
           <input type="email" name="email"></input>

@@ -1,6 +1,6 @@
 import { Formik, useFormik } from 'formik';
 import { object, string } from 'yup';
-import { useDispatch, useSelector } from 'react-redux';
+ import { useDispatch, useSelector } from 'react-redux';
 import { addContacts } from 'redux/contacts/operations';
 import {
   FormWrapper,
@@ -13,7 +13,7 @@ import { getContacts } from 'redux/contacts/selector.js';
 
 const schema = object({
   name: string().min(2, 'Too Short!').max(70, 'Too Long!').required('Required'),
-  phone: string().min(9).max(19).required('Required'),
+  number: string().min(9).max(19).required('Required'),
 });
 
 export default function ContactForm() {
@@ -26,17 +26,17 @@ export default function ContactForm() {
     );
   };
   const formik = useFormik({
-    initialValues: { name: '', phone: '' },
+    initialValues: { name: '', number: '' },
   });
 
   const formHandleSubmit = (values, { resetForm }) => {
-    const { name, phone } = values;
-
+    const { name, number } = values;
+ 
     if (offAddContact({ name })) {
       alert('Contact with this name already exists!');
       return;
     }
-    dispatch(addContacts({ name, phone }));
+    dispatch(addContacts({ name, number }));
     resetForm();
   };
 
@@ -64,17 +64,43 @@ export default function ContactForm() {
           Number
           <FormInput
             type="tel"
-            name="phone"
+            name="number"
             placeholder="123-45-67"
             pattern="^[\d+().\s-]*\d{1,9}$"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
           />
-          <ErrorMessageForm name="phone" />
+          <ErrorMessageForm name="number" />
         </FormLabel>
 
-        <FormButton type="submit">Add contact</FormButton>
+        <FormButton type="submit">
+          Add contact
+        </FormButton>
       </FormWrapper>
     </Formik>
   );
 }
+// export default function ContactForm () {
+//   const dispatch = useDispatch();
+
+//   const handleSubmit = e => {
+//     e.preventDefault();
+//     const form = e.currentTarget;
+//     const name = form.elements.name.value;
+//     const number = form.elements.number.value;
+    
+//       dispatch(addContacts({ name, number }));
+//       form.reset();
+
+  
+
+//   };
+
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <input name="name" />
+//       <input name="number" />
+//       <button type="submit">Add task</button>
+//     </form>
+//   );
+// };

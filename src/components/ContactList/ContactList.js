@@ -26,7 +26,7 @@ export const ContactList = () => {
   const deleteContact = contactId => {
     dispatch(deleteContacts(contactId));
   };
-
+console.log(items);
   return (
     <ContactListWrapper>
       <ul>
@@ -34,7 +34,7 @@ export const ContactList = () => {
           filteredItems().map(contact => (
             <ContactListItem key={contact.id}>
               <ContactName>{contact.name}</ContactName>
-              <ContactNumber>{contact.phone}</ContactNumber>
+              <ContactNumber>{contact.number}</ContactNumber>
               <DeleteButton onClick={() => deleteContact(contact.id)}>
                 Delete
               </DeleteButton>

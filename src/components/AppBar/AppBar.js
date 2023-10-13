@@ -5,7 +5,7 @@ import { useAuth } from 'hooks';
 
 export const AppBar = () => {
   const { isLoggedIn } = useAuth();
-
+console.log(isLoggedIn);
   return (
     <header>
       <Navigation />
