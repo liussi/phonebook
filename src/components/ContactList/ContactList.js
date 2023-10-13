@@ -7,13 +7,13 @@ import {
 } from './ContactList.styled';
 import { deleteContacts } from 'redux/contacts/operations';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from 'redux/contacts/selector';
-import { getfilter } from 'redux/filter/selector';
+import { selectContacts } from 'redux/contacts/selector';
+import { selectfilter } from 'redux/filter/selector';
 
 export const ContactList = () => {
   const dispatch = useDispatch();
-  const { filter } = useSelector(getfilter);
-  const items = useSelector(getContacts);
+  const { filter } = useSelector(selectfilter);
+  const items = useSelector(selectContacts);
 
   const filteredItems = () => {
     if (!filter) {
@@ -26,7 +26,7 @@ export const ContactList = () => {
   const deleteContact = contactId => {
     dispatch(deleteContacts(contactId));
   };
-console.log(items);
+
   return (
     <ContactListWrapper>
       <ul>

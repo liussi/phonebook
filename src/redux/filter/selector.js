@@ -1,1 +1,1 @@
-export const getfilter  = state => state.filter;
+export const selectfilter = state => state.filter;

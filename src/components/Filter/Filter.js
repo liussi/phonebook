@@ -2,11 +2,11 @@ import React from 'react';
 import { FilterWrapper, FilterLabel, FilterInput } from './Filter.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilterSearch } from 'redux/filter/filterSlise';
-import { getfilter } from 'redux/filter/selector';
+import { selectfilter } from 'redux/filter/selector';
 
 export const Filter = () => {
 
-  const  {filter}  = useSelector(getfilter);
+  const { filter } = useSelector(selectfilter);
   const dispatch = useDispatch();
 
   const onFilterSearch = e => {

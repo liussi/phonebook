@@ -9,7 +9,7 @@ import {
   FormButton,
   ErrorMessageForm,
 } from './Form.styled.js';
-import { getContacts } from 'redux/contacts/selector.js';
+import { selectContacts } from 'redux/contacts/selector.js';
 
 const schema = object({
   name: string().min(2, 'Too Short!').max(70, 'Too Long!').required('Required'),
@@ -18,7 +18,7 @@ const schema = object({
 
 export default function ContactForm() {
   const dispatch = useDispatch();
-  const items = useSelector(getContacts);
+  const items = useSelector(selectContacts);
 
   const offAddContact = ({ name }) => {
     return items.some(
