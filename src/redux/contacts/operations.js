@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-
 export const fetchContact = createAsyncThunk(
   'contacts/fetchAll',
   async (_, thunkAPI) => {
@@ -38,4 +37,3 @@ export const deleteContacts = createAsyncThunk(
     }
   }
 );
-

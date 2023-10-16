@@ -1,14 +1,9 @@
-import {
-  ContactListWrapper,
-  ContactListItem,
-  ContactName,
-  ContactNumber,
-  DeleteButton,
-} from './ContactList.styled';
+
 import { deleteContacts } from 'redux/contacts/operations';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from 'redux/contacts/selector';
 import { selectfilter } from 'redux/filter/selector';
+import { Box, Button, Flex, List,  ListItem } from '@chakra-ui/react';
 
 export const ContactList = () => {
   const dispatch = useDispatch();
@@ -19,7 +14,6 @@ export const ContactList = () => {
     if (!filter) {
       return items;
     }
-
     return items.filter(contact => contact.name.toLowerCase().includes(filter));
   };
 
@@ -28,19 +22,27 @@ export const ContactList = () => {
   };
 
   return (
-    <ContactListWrapper>
-      <ul>
+    <Box>
+      <List spacing={3}>
         {filteredItems() &&
           filteredItems().map(contact => (
-            <ContactListItem key={contact.id}>
-              <ContactName>{contact.name}</ContactName>
-              <ContactNumber>{contact.number}</ContactNumber>
-              <DeleteButton onClick={() => deleteContact(contact.id)}>
-                Delete
-              </DeleteButton>
-            </ContactListItem>
+            <ListItem key={contact.id}>
+              <Flex justifyContent="space-between" gap="50px" alignItems='center'>
+                <span>
+                  {contact.name} - {contact.number}
+                </span>
+
+                <Button
+                  onClick={() => deleteContact(contact.id)}
+                  colorScheme="pink"
+                  variant="outline"
+                >
+                  Delete
+                </Button>
+              </Flex>
+            </ListItem>
           ))}
-      </ul>
-    </ContactListWrapper>
+      </List>
+    </Box>
   );
 };

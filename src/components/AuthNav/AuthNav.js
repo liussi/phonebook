@@ -1,10 +1,17 @@
-import { NavLink } from "react-router-dom"
+import { Box, Link as ChakraLink } from '@chakra-ui/react';
+import { Link as ReactRouterLink } from 'react-router-dom';
+import { linkStyles } from '../../GlobalStyle';
 
 export const AuthNav = () => {
-    return (
-      <div>
-        <NavLink to='/register'>Register</NavLink>
-        <NavLink to='/login'>Log In</NavLink>
-      </div>
-    );
-}
+
+  return (
+    <Box>
+      <ChakraLink as={ReactRouterLink} to="/register" {...linkStyles}>
+        Register
+      </ChakraLink>
+      <ChakraLink as={ReactRouterLink} to="/login" {...linkStyles}>
+        Log In
+      </ChakraLink>
+    </Box>
+  );
+};

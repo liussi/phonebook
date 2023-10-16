@@ -1,9 +1,8 @@
 import React from 'react';
-import { FilterWrapper, FilterLabel, FilterInput } from './Filter.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilterSearch } from 'redux/filter/filterSlise';
 import { selectfilter } from 'redux/filter/selector';
-
+import { Box, Center, Input, Text } from '@chakra-ui/react';
 export const Filter = () => {
 
   const { filter } = useSelector(selectfilter);
@@ -15,15 +14,19 @@ export const Filter = () => {
   };
   
   return (
-    <FilterWrapper>
-      <FilterLabel>Find contacts by name</FilterLabel>
-      <FilterInput
-        type="text"
-        value={filter}
-        onChange={onFilterSearch}
-        placeholder="Search..."
-      />
-    </FilterWrapper>
+    <Center>
+      <Box mb="20px">
+        <Text mb="8px">Find contacts by name</Text>
+        <Input
+          type="text"
+          value={filter}
+          onChange={onFilterSearch}
+          placeholder="Search..."
+          size="md"
+          width="auto"
+        />
+      </Box>
+    </Center>
   );
 };
 

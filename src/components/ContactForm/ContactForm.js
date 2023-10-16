@@ -1,15 +1,10 @@
-import { Formik, useFormik } from 'formik';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { object, string } from 'yup';
- import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addContacts } from 'redux/contacts/operations';
-import {
-  FormWrapper,
-  FormLabel,
-  FormInput,
-  FormButton,
-  ErrorMessageForm,
-} from './Form.styled.js';
-import { selectContacts } from 'redux/contacts/selector.js';
+import { selectContacts } from 'redux/contacts/selector';
+import { FormControl, FormLabel, Input, Button } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 
 const schema = object({
   name: string().min(2, 'Too Short!').max(70, 'Too Long!').required('Required'),
@@ -17,6 +12,7 @@ const schema = object({
 });
 
 export default function ContactForm() {
+  const toast = useToast();
   const dispatch = useDispatch();
   const items = useSelector(selectContacts);
 
@@ -25,17 +21,22 @@ export default function ContactForm() {
       contact => contact.name.toLowerCase() === name.toLowerCase()
     );
   };
-  const formik = useFormik({
-    initialValues: { name: '', number: '' },
-  });
 
   const formHandleSubmit = (values, { resetForm }) => {
     const { name, number } = values;
- 
+
     if (offAddContact({ name })) {
-      alert('Contact with this name already exists!');
+      toast({
+        title: 'An error occurred.',
+        description: 'Contact with this name already exists!',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+        position: 'top',
+      });
       return;
     }
+
     dispatch(addContacts({ name, number }));
     resetForm();
   };
@@ -44,63 +45,36 @@ export default function ContactForm() {
     <Formik
       validationSchema={schema}
       onSubmit={formHandleSubmit}
-      initialValues={formik.initialValues}
+      initialValues={{ name: '', number: '' }}
     >
-      <FormWrapper>
-        <FormLabel>
-          Name
-          <FormInput
-            type="text"
-            name="name"
-            placeholder="Name Lastname"
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            required
-          />
-          <ErrorMessageForm name="name" />
-        </FormLabel>
+      <Form>
+        <FormControl>
+          <FormLabel>
+            Name
+            <Field
+              as={Input}
+              type="text"
+              name="name"
+              placeholder="Name Lastname"
+            />
+            <ErrorMessage name="name" component="div" />
+          </FormLabel>
 
-        <FormLabel>
-          Number
-          <FormInput
-            type="tel"
-            name="number"
-            placeholder="123-45-67"
-            pattern="^[\d+().\s-]*\d{1,9}$"
-            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-            required
-          />
-          <ErrorMessageForm name="number" />
-        </FormLabel>
-
-        <FormButton type="submit">
-          Add contact
-        </FormButton>
-      </FormWrapper>
+          <FormLabel>
+            Number
+            <Field
+              as={Input}
+              type="tel"
+              name="number"
+              placeholder="123-45-67"
+            />
+            <ErrorMessage name="number" component="div" />
+          </FormLabel>
+          <Button type="submit" colorScheme="pink" marginEnd variant="outline">
+            Add contact
+          </Button>
+        </FormControl>
+      </Form>
     </Formik>
   );
 }
-// export default function ContactForm () {
-//   const dispatch = useDispatch();
-
-//   const handleSubmit = e => {
-//     e.preventDefault();
-//     const form = e.currentTarget;
-//     const name = form.elements.name.value;
-//     const number = form.elements.number.value;
-    
-//       dispatch(addContacts({ name, number }));
-//       form.reset();
-
-  
-
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       <input name="name" />
-//       <input name="number" />
-//       <button type="submit">Add task</button>
-//     </form>
-//   );
-// };

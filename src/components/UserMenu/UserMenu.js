@@ -1,3 +1,4 @@
+import { Button, Tag, TagLabel, Text } from '@chakra-ui/react';
 import { useAuth } from 'hooks';
 import { useDispatch } from 'react-redux';
 import { logOut } from 'redux/auth/operations';
@@ -11,10 +12,17 @@ export const UserMenu = () => {
   };
   return (
     <div>
-      <p>{user.email}</p>
-      <button type="button" onClick={handleLogOut}>
+      <Tag size="lg" colorScheme="red" borderRadius="full" mr={10}>
+        <TagLabel>{user.email}</TagLabel>
+      </Tag>
+      <Button
+        type="button"
+        onClick={handleLogOut}
+        colorScheme="pink"
+        variant="solid"
+      >
         Logout
-      </button>
+      </Button>
     </div>
   );
 };
