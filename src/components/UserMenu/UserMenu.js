@@ -1,4 +1,4 @@
-import { Button, Tag, TagLabel, Text } from '@chakra-ui/react';
+import { Button, Tag, TagLabel} from '@chakra-ui/react';
 import { useAuth } from 'hooks';
 import { useDispatch } from 'react-redux';
 import { logOut } from 'redux/auth/operations';

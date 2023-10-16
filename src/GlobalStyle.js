@@ -7,7 +7,6 @@ export const linkStyles = {
   fontWeight: 700,
   bgClip: 'text',
   color: '#2a363b',
-  fontWeight: 'extrabold',
   _hover: { color: '#e84a5f' },
 };
 
