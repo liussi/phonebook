@@ -12,6 +12,7 @@ import { useAuth } from 'hooks';
 import { RestrictedRoute } from './RestrictedRoute';
 import { PrivateRoute } from './PrivateRoute';
 import { Spinner } from '@chakra-ui/react';
+import NotFound from './NotFound/NotFound';
 
 export function App() {
   const dispatch = useDispatch();
@@ -45,6 +46,7 @@ export function App() {
             element={<PrivateRoute component={Contacts} redirectTo="/login" />}
           />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );
