@@ -1,8 +1,8 @@
 {
-  "name": "react-homework-template",
+  "name": "phonebook",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://liussi.github.io/goit-react-hw-08-phonebook/",
+  "homepage": "https://liussi.github.io/phonebook/",
   "dependencies": {
     "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/react": "^2.8.1",
